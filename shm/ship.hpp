@@ -5,22 +5,13 @@
 #include <vector>
 #include "cargo.hpp"
 
-
 // Class responsible for managing Ship in the game.
-class Ship 
-{
+class Ship {
 public:
     Ship()
         : id_(-1) {}
     Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargos)
-        :  capacity_(capacity)
-        , maxCrew_(maxCrew)
-        , crew_(crew)
-        , speed_(speed)
-        , name_(name)
-        , id_(id)
-        , cargos_(cargos)
-     {}
+        : capacity_(capacity), maxCrew_(maxCrew), crew_(crew), speed_(speed), name_(name), id_(id), cargos_(cargos) {}
     Ship(size_t maxCrew, size_t speed, size_t id)
         : Ship(0, maxCrew, 0, speed, "", id, {}) {}
 
@@ -33,11 +24,14 @@ public:
     size_t getCrew() const;
     std::string getName() const;
     size_t getId() const;
-    std::shared_ptr<Cargo> getCargo(size_t index) const;    
+    std::shared_ptr<Cargo> getCargo(size_t index) const;
     std::vector<std::shared_ptr<Cargo>> getCargosVector() const;
-    
+
     void setName(const std::string& name);
-   
+    void unload(const std::shared_ptr<Cargo>& cargo);
+    void load(const std::shared_ptr<Cargo>& cargo, size_t amount);
+    std::vector<std::shared_ptr<Cargo>>::iterator findCargo(const std::shared_ptr<Cargo>& cargo);
+
 private:
     size_t capacity_;
     size_t maxCrew_;

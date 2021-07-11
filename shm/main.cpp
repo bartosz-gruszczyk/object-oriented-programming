@@ -2,63 +2,48 @@
 #include <memory>
 
 #include "cargo.hpp"
-#include "player.hpp"
-#include "ship.hpp"
 #include "fruit.hpp"
-#include "alcohol.hpp"
 #include "item.hpp"
+#include "alcohol.hpp"
+#include "ship.hpp"
 
-void print(const Fruit& sth) {
-    std::cout << "nazwa: " << sth.getName() << ", amount: " << sth.getAmount() << ", base price: " << sth.getBasePrice() << ", dacayDays: " << sth.getExpirationDate() 
-              << " cena: " << sth.getPrice() << ", dni od kupienia: "<< sth.getPurchaseData() << '\n';
+void print(const Ship& s) {
+    for(const auto& el : s.getCargosVector()) {
+        std::cout << "nazwa: " << el->getName() << "\t| amount: " << el->getAmount() << "\t| price: " << el->getPrice() << '\n';
+    }
 }
 
 int main() {
-    
-    Fruit apple("pomarancza", 50, 30, 14);
-    print(apple);
-    apple += 10;
-    print(apple);
+    Fruit f1("Fasola", 10, 50, 5);
+    Item i1("Kosc", 10, 20, Rarity::legendary);
+    Alcohol a1("Burbon", 10, 20, 50);
 
-    Fruit sth("pomarancza", 30, 10, 2);
+    auto c1 = std::make_shared<Fruit>(f1);
+    auto c2 = std::make_shared<Item>(i1);
+    auto c3= std::make_shared<Alcohol>(a1);
 
-    if(apple == sth) {
-        apple +=sth.getAmount();
-    }
+    auto c4 = std::make_shared<Fruit>("apple", 40, 20, 20);
+    auto c5 = std::make_shared<Fruit>("banan", 10, 20, 5);
 
-    --apple;
-    apple--;
+    std::vector<std::shared_ptr<Cargo>> dupa{c1, c2, c3};
 
-    print(apple);
+    Ship sh1(500, 20, 5, 3, "Bambo", 1, dupa);
 
-    // Alcohol a1("kola", 2, 2, 2);
-    Fruit f2("jabłko", 10, 20, 10);
+    print(sh1);
+    sh1.unload(c2);
+    std::cout << "Po usunięciem\n";
+    print(sh1);
 
-    Item i1("osc", 2, 2, Rarity::common);
-    Item i2("osc", 2, 3, Rarity::legendary);
+    sh1.load(c3 , 40);
+    std::cout << "Po dodaniu!\n";
+     print(sh1);
 
-    std::cout << "Ilość osci: " << i1.getAmount() << '\n';
-    i1+= 20;
-    std::cout << "Ilość osci: " << i1.getAmount() << '\n';
-    f2+= 10;
-    i1 -= 10;
-    std::cout << "Ilość osci: " << i1.getAmount() << '\n';
-    if(i1 == i2) {
-        i1 += i2.getAmount();
-    }
-    std::cout << "Ilość osci: " << i1.getAmount() << '\n';
-    std::cout << "cena osci 1: " << i1.getPrice() << '\n';
-    std::cout << "cena osci 2: " << i2.getPrice() << '\n';
 
-    Alcohol a1("whisky", 10, 10 ,50);
-    a1 += 20;
+    sh1.load(c4 , 80);
+    sh1.load(c4 , 80);
+    std::cout << "Po dodaniu!\n";
+    print(sh1);
 
-    std::cout << "Whisky ile go mam:  " << a1.getAmount()<< '\n';
-
-    std::cout << "Cena aktualna: " << a1.getPrice() << '\n';
-
-    print(apple);
 
     return 0;
-
 }
