@@ -67,11 +67,11 @@ std::vector<std::shared_ptr<Cargo>>::iterator Ship::findCargo(const std::shared_
                                                               cargo->getBasePrice() == el->getBasePrice(); });
     return find;
 }
-
+// Function erase a cargo from the Ship object.
 void Ship::unload(const std::shared_ptr<Cargo>& cargo) {
     cargos_.erase(findCargo(cargo));
 }
-
+// 
 void Ship::load(const std::shared_ptr<Cargo>& cargo, size_t amount) {
     auto isNew = findCargo(cargo);
 

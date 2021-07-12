@@ -1,49 +1,63 @@
 #include <iostream>
 #include <memory>
 
+#include "alcohol.hpp"
 #include "cargo.hpp"
+#include "dryFruit.hpp"
 #include "fruit.hpp"
 #include "item.hpp"
-#include "alcohol.hpp"
 #include "ship.hpp"
 
 void print(const Ship& s) {
-    for(const auto& el : s.getCargosVector()) {
+    for (const auto& el : s.getCargosVector()) {
         std::cout << "nazwa: " << el->getName() << "\t| amount: " << el->getAmount() << "\t| price: " << el->getPrice() << '\n';
     }
 }
 
 int main() {
-    Fruit f1("Fasola", 10, 50, 5);
-    Item i1("Kosc", 10, 20, Rarity::legendary);
-    Alcohol a1("Burbon", 10, 20, 50);
+    DryFruit df1("suszona Śliwa", 50, 20, 20);
+    std::cout << '\n';
+    std::cout << " Przed obcięciem ceny \n";
+    std::cout << "Counter " << df1.getCounter() << '\n';
+    std::cout << "Data warznosci: " << df1.getPurchaseData() << '\n';
+    std::cout << "Cena : " << df1.getPrice() << '\n';
+    std::cout << '\n';
 
-    auto c1 = std::make_shared<Fruit>(f1);
-    auto c2 = std::make_shared<Item>(i1);
-    auto c3= std::make_shared<Alcohol>(a1);
+    df1--;
+    std::cout << "po pierwszym odjęciu!" << '\n';
+    std::cout << "Counter " << df1.getCounter() << '\n';
+    std::cout << "Data warznosci: " << df1.getPurchaseData() << '\n';
+    std::cout << "Cena : " << df1.getPrice() << '\n';
 
-    auto c4 = std::make_shared<Fruit>("apple", 40, 20, 20);
-    auto c5 = std::make_shared<Fruit>("banan", 10, 20, 5);
+    df1--;
+    std::cout << "po  odjęciu!" << '\n';
+    std::cout << "Counter  " << df1.getCounter() << '\n';
+    std::cout << "Data warznosci: " << df1.getPurchaseData() << '\n';
+    std::cout << "Cena : " << df1.getPrice() << '\n';
 
-    std::vector<std::shared_ptr<Cargo>> dupa{c1, c2, c3};
+    --df1;
+    std::cout << "po  odjęciu!" << '\n';
+    std::cout << "Counter " << df1.getCounter() << '\n';
+    std::cout << "Data warznosci: " << df1.getPurchaseData() << '\n';
+    std::cout << "Cena : " << df1.getPrice() << '\n';
 
-    Ship sh1(500, 20, 5, 3, "Bambo", 1, dupa);
+        --df1;
+        --df1;
+        --df1;
+        --df1;
+        --df1;
+        --df1;
+        --df1;
+        --df1;
+        --df1;
+        --df1;
+    std::cout << "po  odjęciu!" << '\n';
+    std::cout << "Counter " << df1.getCounter() << '\n';
+    std::cout << "Data warznosci: " << df1.getPurchaseData() << '\n';
+    std::cout << "Cena : " << df1.getPrice() << '\n';
 
-    print(sh1);
-    sh1.unload(c2);
-    std::cout << "Po usunięciem\n";
-    print(sh1);
-
-    sh1.load(c3 , 40);
-    std::cout << "Po dodaniu!\n";
-     print(sh1);
-
-
-    sh1.load(c4 , 80);
-    sh1.load(c4 , 80);
-    std::cout << "Po dodaniu!\n";
-    print(sh1);
-
+    Fruit f1("Ananas", 20, 20, 10);
+    
 
     return 0;
 }
