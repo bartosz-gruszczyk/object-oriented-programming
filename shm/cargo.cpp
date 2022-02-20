@@ -1,21 +1,26 @@
-#include <iostream>
 #include "cargo.hpp"
+#include <iostream>
 
-Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice, Time *time)
+Cargo::Cargo(const std::string& name,
+    size_t amount,
+    size_t basePrice,
+    Time* time)
     : name_(name)
     , amount_(amount)
     , basePrice_(basePrice)
     , time_(time)
-    {
-        time->attachObserver(this);
-    }
+{
+    time->attachObserver(this);
+}
 
-Cargo& Cargo::operator+=(size_t amount) {
+Cargo& Cargo::operator+=(size_t amount)
+{
     amount_ += amount;
     return *this;
 }
 
-Cargo& Cargo::operator-=(size_t amount) {
+Cargo& Cargo::operator-=(size_t amount)
+{
     if (amount <= amount_) {
         amount_ -= amount;
     } else {
@@ -24,11 +29,13 @@ Cargo& Cargo::operator-=(size_t amount) {
     return *this;
 }
 
-bool Cargo::operator==(const Cargo& cargo) const {
+bool Cargo::operator==(const Cargo& cargo) const
+{
     return cargo.getName() == getName();
 }
 
-void Cargo::nextDay() {
+void Cargo::nextDay()
+{
     if (lifespan_ >= 0.01) {
         lifespan_ -= 0.01;
     }

@@ -1,13 +1,13 @@
 
 #pragma once
-#include <string>
-#include "time.hpp"
 #include "iObserver.hpp"
+#include "time.hpp"
+#include <string>
 
-//Class responsible for managing Cargo in the game.
+// Class responsible for managing Cargo in the game.
 class Cargo : public IObserver {
 public:
-    Cargo(const std::string& name, size_t amount, size_t basePrice, Time *time);
+    Cargo(const std::string& name, size_t amount, size_t basePrice, Time* time);
     Cargo(const std::string& name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;
 
@@ -22,7 +22,7 @@ public:
 
     virtual void setAmount(const size_t& amount) = 0; //{ amount_ = amount; };
     void nextDay();
-    
+
 protected:
     std::string name_;
     size_t amount_;

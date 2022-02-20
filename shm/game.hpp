@@ -2,29 +2,25 @@
 #include <iostream>
 #include <memory>
 
+#include "coordinates.hpp"
+#include "island.hpp"
 #include "map.hpp"
 #include "player.hpp"
 #include "ship.hpp"
 #include "time.hpp"
-#include "island.hpp"
-#include "coordinates.hpp"
 
 class Game {
-    enum class MenuOption {
-        Travel = 1,
+    enum class MenuOption { Travel = 1,
         PrintCargo,
         Buy,
         Sell,
-        Exit
-    };
-
+        Exit };
 
 public:
     // Game();
     Game(size_t money, size_t days, size_t goal);
     ~Game();
     void startGame();
-
 
     void printWinScreen();
     void printLoseScreen();
@@ -49,7 +45,8 @@ private:
     size_t gameDayes_;
     size_t finalGoal_;
 
-    std::shared_ptr<Player> player_;;
+    std::shared_ptr<Player> player_;
+    ;
     std::shared_ptr<Ship> ship_;
     std::shared_ptr<Time> time_;
     std::shared_ptr<Map> map_;

@@ -1,8 +1,8 @@
-#include <random>
 #include "map.hpp"
+#include <random>
 
-
-Map::Map() {
+Map::Map()
+{
     islands_.reserve(10);
     for (int i = 0; i < islandsQuantity_;) {
         Coordinates tempCoordinates = getRandomCoordinates();
@@ -14,7 +14,8 @@ Map::Map() {
     }
 }
 
-Island* const Map::getIsland(const Coordinates& coordinate) {
+Island* const Map::getIsland(const Coordinates& coordinate)
+{
     for (auto& island : islands_) {
         if (island.getPosition() == coordinate) {
             return &island;
@@ -23,11 +24,13 @@ Island* const Map::getIsland(const Coordinates& coordinate) {
     return nullptr;
 }
 
-Coordinates Map::getRandomCoordinates() {
+Coordinates Map::getRandomCoordinates()
+{
     std::random_device randomDevice;
     std::mt19937 randomGenerator(randomDevice());
     std::uniform_int_distribution<> widthDistribution(0, maxWidth_);
     std::uniform_int_distribution<> heightDistribution(0, maxHeight_);
-    Coordinates randomCoordinates(widthDistribution(randomGenerator), heightDistribution(randomGenerator));
+    Coordinates randomCoordinates(widthDistribution(randomGenerator),
+        heightDistribution(randomGenerator));
     return randomCoordinates;
 }

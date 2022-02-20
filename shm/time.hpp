@@ -1,7 +1,7 @@
 #pragma once
-#include <memory>
-#include <list>
 #include "iObserver.hpp"
+#include <list>
+#include <memory>
 
 class IObserver;
 
@@ -10,17 +10,14 @@ public:
     Time();
     ~Time() = default;
 
+    void attachObserver(IObserver*);
 
-    void attachObserver(IObserver * );
-
-    void detachObserver(IObserver * );
+    void detachObserver(IObserver*);
 
     void onTimeChange();
 
-
 private:
-    std::list<IObserver*> observerList_; 
+    std::list<IObserver*> observerList_;
 
     void notifyAll();
-
 };
