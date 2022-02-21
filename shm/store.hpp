@@ -7,13 +7,12 @@
 
 #include "cargo.hpp"
 #include "player.hpp"
+#include "time.hpp"
 
-enum class Response {
-    done,
+enum class Response { done,
     lack_of_money,
     lack_of_cargo,
-    lack_of_space
-};
+    lack_of_space };
 
 class Store {
 public:
@@ -29,18 +28,21 @@ public:
     // void unload(const std::shared_ptr<Cargo>& cargo);
     void addCargosOfStore(std::shared_ptr<Cargo>);
 
-
     void loadShip(std::shared_ptr<Cargo>& cargo, size_t& amount);
     void unloadShip(std::shared_ptr<Cargo>& cargo, size_t& amount);
     // void ereasFromCargosOfStore(std::shared_ptr<Cargo>);
-    // std::shared_ptr<Cargo> findCargoInStore(const std::shared_ptr<Cargo>  wantedCargo);    
+    // std::shared_ptr<Cargo> findCargoInStore(const std::shared_ptr<Cargo>
+    // wantedCargo);
 
     friend std::ostream& operator<<(std::ostream& os, const Store& store);
-    std::vector<std::shared_ptr<Cargo>> getCargoOfStore() const { return stock_; };
+    std::vector<std::shared_ptr<Cargo>> getCargoOfStore() const
+    {
+        return stock_;
+    };
 
 private:
-    std::vector<std::shared_ptr<Cargo>> stock_{};
+    std::vector<std::shared_ptr<Cargo>> stock_ {};
     void generateDefaultCargo();
     void nextDay();
-
+    Time* time_ {nullptr};
 };

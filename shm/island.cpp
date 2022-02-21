@@ -1,9 +1,11 @@
 #include "island.hpp"
 
-Coordinates Island::getPosition() const {
+Coordinates Island::getPosition() const
+{
     return position_;
 }
 
-void Island::setPosition(Coordinates position){
+void Island::setPosition(Coordinates position)
+{
     position_ = position;
 }
