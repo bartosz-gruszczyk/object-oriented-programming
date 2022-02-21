@@ -9,12 +9,42 @@
 #include "item.hpp"
 #include "ship.hpp"
 
-// Class responsible for managing Ships in the game.
+Ship::Ship(Time* time)
+    : id_(-1)
+{
+    time->attachObserver(this);
+}
+
+Ship::Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed,
+    const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargos,
+    Time* time)
+    : capacity_(capacity)
+    , maxCrew_(maxCrew)
+    , crew_(crew)
+    , speed_(speed)
+    , name_(name)
+    , id_(id)
+    , cargos_(cargos)
+    , time_(time)
+{
+    time->attachObserver(this);
+}
+Ship::Ship(size_t maxCrew, size_t speed, size_t id, Time* time)
+    : Ship(0, maxCrew, 0, speed, "", id, {}, time)
+{
+    time->attachObserver(this);
+}
+
+Ship::~Ship() {
+    time_->detachObserver(this);
+}
+
 Ship& Ship::operator-=(size_t num)
 {
     if (crew_ - num <= crew_) {
         crew_ -= num;
     } else {
+        crew_ = 0;
         std::cerr << "You need at least one member of the crew !!!\n";
     }
     return *this;
@@ -25,6 +55,7 @@ Ship& Ship::operator+=(size_t num)
     if (crew_ + num <= maxCrew_) {
         crew_ += num;
     } else {
+        crew_ = maxCrew_;
         std::cerr << " The maximum amount of members of the crew is " << maxCrew_
                   << " !!!! \n";
     }
@@ -123,22 +154,6 @@ void Ship::load(std::shared_ptr<Cargo>& cargo, size_t amount)
     std::cout << "wychodze z funkcji Ship::load\n";
 }
 
-// std::ostream& operator<<(std::ostream& os, const std::shared_ptr<Ship> ship)
-// {
-//     int counter = 1;
-//     for (const auto el : ship->getCargosVector()) {
-//         os << "|" << std::setw(20);
-//         os << std::setfill(' ') << std::setw(20) << "ID: " << counter;
-//         os << std::setw(20) << " TYPE OF CARGO: " << el->getName();
-//         os << std::setw(20) << " AMOUNT: " << el->getAmount();
-//         os << std::setw(20) << " PRICE: " << el->getPrice() << '\n';
-//         counter++;
-//     }
-//     os << "|" << std::setfill('*') << std::setw(100) << "|\n";
-
-//     return os;
-// }
-
 void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount)
 {
     if (Alcohol* alcohol = dynamic_cast<Alcohol*>(cargo.get())) {
@@ -154,7 +169,12 @@ void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount)
             item->getName(), amount, item->getPrice(), item->getRarity()));
     }
 }
-void Ship::nextDay(Player& player) override
+void Ship::setOwner(Player* newOwner)
 {
-    player.setMoney(player.getMoney() - ((*player.getShip()).getCrew()));
+    owner_ = newOwner;
+}
+
+void Ship::nextDay()
+{
+    owner_->setMoney(owner_->getMoney() - ((*owner_->getShip()).getCrew()));
 }

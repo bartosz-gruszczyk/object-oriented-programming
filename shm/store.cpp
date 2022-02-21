@@ -186,31 +186,31 @@ void Store::generateDefaultCargo()
     std::uniform_int_distribution<> priceR(PRICE_MIN, PRICE_MAX);
 
     stock_.reserve(12);
+    stock_.push_back(
+        std::make_shared<Fruit>("Peach", amountR(gr), priceR(gr), dayR(gr)), time_);
 
-    stock_.push_back(
-        std::make_shared<Alcohol>("BUH", amountR(gr), priceR(gr), powerR(gr)));
-    stock_.push_back(std::make_shared<Alcohol>("Jack Walker", amountR(gr),
-        priceR(gr), powerR(gr)));
-    stock_.push_back(std::make_shared<Alcohol>("Johny Daniels", amountR(gr),
-        priceR(gr), powerR(gr)));
-    stock_.push_back(std::make_shared<Alcohol>("Żubrówkeczka", amountR(gr),
-        priceR(gr), powerR(gr)));
-    stock_.push_back(
-        std::make_shared<Fruit>("Peach", amountR(gr), priceR(gr), dayR(gr)));
-    stock_.push_back(
-        std::make_shared<Fruit>("Strawbarry", amountR(gr), priceR(gr), dayR(gr)));
-    stock_.push_back(std::make_shared<Fruit>("Water melon", amountR(gr),
-        priceR(gr), dayR(gr)));
-    stock_.push_back(
-        std::make_shared<Fruit>("Coconat", amountR(gr), priceR(gr), dayR(gr)));
-    stock_.push_back(
-        std::make_shared<Item>("Fork", amountR(gr), priceR(gr), Rarity::common));
-    stock_.push_back(std::make_shared<Item>("Philosopher's stone", amountR(gr),
-        priceR(gr), Rarity::legendary));
-    stock_.push_back(std::make_shared<Item>("necklace", amountR(gr), priceR(gr),
-        Rarity::rare));
-    stock_.push_back(
-        std::make_shared<Item>("Ivory", amountR(gr), priceR(gr), Rarity::rare));
+    // stock_.push_back(
+    //     std::make_shared<Alcohol>("BUH", amountR(gr), priceR(gr), powerR(gr)));
+    // stock_.push_back(std::make_shared<Alcohol>("Jack Walker", amountR(gr),
+    //     priceR(gr), powerR(gr)));
+    // stock_.push_back(std::make_shared<Alcohol>("Johny Daniels", amountR(gr),
+    //     priceR(gr), powerR(gr)));
+    // stock_.push_back(std::make_shared<Alcohol>("Żubrówkeczka", amountR(gr),
+    //     priceR(gr), powerR(gr)));
+    // stock_.push_back(
+    //     std::make_shared<Fruit>("Strawbarry", amountR(gr), priceR(gr), dayR(gr)));
+    // stock_.push_back(std::make_shared<Fruit>("Water melon", amountR(gr),
+    //     priceR(gr), dayR(gr)));
+    // stock_.push_back(
+    //     std::make_shared<Fruit>("Coconat", amountR(gr), priceR(gr), dayR(gr)));
+    // stock_.push_back(
+    //     std::make_shared<Item>("Fork", amountR(gr), priceR(gr), Rarity::common));
+    // stock_.push_back(std::make_shared<Item>("Philosopher's stone", amountR(gr),
+    //     priceR(gr), Rarity::legendary));
+    // stock_.push_back(std::make_shared<Item>("necklace", amountR(gr), priceR(gr),
+    //     Rarity::rare));
+    // stock_.push_back(
+    //     std::make_shared<Item>("Ivory", amountR(gr), priceR(gr), Rarity::rare));
 }
 
 void Store::loadShip(std::shared_ptr<Cargo>& cargo, size_t& amount)

@@ -4,8 +4,9 @@
 Fruit::Fruit(const std::string& name,
     size_t amount,
     size_t basePrice,
-    size_t expirationDate)
-    : Cargo(name, amount, basePrice)
+    size_t expirationDate,
+    Time* time)
+    : Cargo(name, amount, basePrice, time)
     , expirationDate_(expirationDate) {};
 
 size_t Fruit::getPrice() const

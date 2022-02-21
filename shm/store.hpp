@@ -7,6 +7,7 @@
 
 #include "cargo.hpp"
 #include "player.hpp"
+#include "time.hpp"
 
 enum class Response { done,
     lack_of_money,
@@ -43,4 +44,5 @@ private:
     std::vector<std::shared_ptr<Cargo>> stock_ {};
     void generateDefaultCargo();
     void nextDay();
+    Time* time_ {nullptr};
 };

@@ -3,16 +3,17 @@ cmake_minimum_required(VERSION 3.10)
 project(SHM_2077)
 
 set(FILES
+    alcohol.cpp
+    cargo.cpp
+    coordinates.cpp
+    fruit.cpp 
     island.cpp
+    item.cpp 
     map.cpp
     player.cpp
     ship.cpp
-    coordinates.cpp
-    cargo.cpp
     store.cpp
-    alcohol.cpp
-    item.cpp 
-    fruit.cpp 
+    time.cpp
     )
 
 set(FLAGS 
