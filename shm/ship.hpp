@@ -23,7 +23,7 @@ public:
         const std::string& name,
         size_t id,
         std::vector<std::shared_ptr<Cargo>> cargos,
-        Time* time)
+        std::shared_ptr<Time> time)
         : capacity_(capacity)
         , maxCrew_(maxCrew)
         , crew_(crew)
@@ -35,7 +35,7 @@ public:
     {
         time->attachObserver(this);
     }
-    Ship(size_t maxCrew, size_t speed, size_t id, Time* time)
+    Ship(size_t maxCrew, size_t speed, size_t id, std::shared_ptr<Time> time)
         : Ship(0, maxCrew, 0, speed, "", id, {}, time)
     {
         time->attachObserver(this);
@@ -65,14 +65,16 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Ship& ship);
     void nextDay(Player& player);
+    void 
 
 private:
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;
     size_t speed_;
-    Time* time_;
+    std::shared_ptr<Time> time_;
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargos_;
+    Player* owner = nullptr;
 };
