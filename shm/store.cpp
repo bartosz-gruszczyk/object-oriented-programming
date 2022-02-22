@@ -36,28 +36,28 @@ Store::Store()
 //     }
 // }
 
-// Response Store::buy(std::shared_ptr<Cargo>& cargo, size_t amount, Player*
-// player) {
-//     if (!cargo || !amount || !player) {
-//         return Response::lack_of_cargo;
-//     }
+Response Store::buy(std::shared_ptr<Cargo>& cargo, size_t amount, Player*
+player) {
+    if (!cargo || !amount || !player) {
+        return Response::lack_of_cargo;
+    }
 
-//     std::shared_ptr<Ship> playerShip = player->getShip();
-//     if (!playerShip) {
-//         return Response::lack_of_cargo;
-//     }
+    std::shared_ptr<Ship> playerShip = player->getShip();
+    if (!playerShip) {
+        return Response::lack_of_cargo;
+    }
 
-//     auto soldPlayerCargo = playerShip->getCargosVector()[0];
-//     for (const auto el : playerShip->getCargosVector()) {
-//         auto loopCargo = el;
+    auto soldPlayerCargo = playerShip->getCargosVector()[0];
+    for (const auto el : playerShip->getCargosVector()) {
+        auto loopCargo = el;
 
-//         if (loopCargo == cargo) {
-//             if (loopCargo->getAmount() < amount) {
-//                 return Response::lack_of_space;
-//             }
-//         }
-//         soldPlayerCargo = loopCargo;
-//     }
+        if (loopCargo == cargo) {
+            if (loopCargo->getAmount() < amount) {
+                return Response::lack_of_space;
+            }
+        }
+        soldPlayerCargo = loopCargo;
+    }
 
 //     if (!soldPlayerCargo) {
 //         return Response::lack_of_cargo;
