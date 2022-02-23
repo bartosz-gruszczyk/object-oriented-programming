@@ -4,8 +4,9 @@
 Alcohol::Alcohol(const std::string& name,
     size_t amount,
     size_t basePrice,
-    size_t percentage)
-    : Cargo(name, amount, basePrice)
+    size_t percentage,
+    Time* time)
+    : Cargo(name, amount, basePrice, time)
     , percentage_(percentage) {};
 
 size_t Alcohol::getPrice() const

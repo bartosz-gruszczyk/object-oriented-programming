@@ -35,7 +35,8 @@ Ship::Ship(size_t maxCrew, size_t speed, size_t id, Time* time)
     time->attachObserver(this);
 }
 
-Ship::~Ship() {
+Ship::~Ship()
+{
     time_->detachObserver(this);
 }
 
@@ -159,14 +160,16 @@ void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount)
     if (Alcohol* alcohol = dynamic_cast<Alcohol*>(cargo.get())) {
         cargos_.push_back(std::make_shared<Alcohol>(alcohol->getName(), amount,
             alcohol->getBasePrice(),
-            alcohol->getPercentage()));
+            alcohol->getPercentage(),
+            time_));
     } else if (Fruit* fruit = dynamic_cast<Fruit*>(cargo.get())) {
         cargos_.push_back(std::make_shared<Fruit>(fruit->getName(), amount,
             fruit->getBasePrice(),
-            fruit->getExpirationDate()));
+            fruit->getExpirationDate(),
+            time_));
     } else if (Item* item = dynamic_cast<Item*>(cargo.get())) {
         cargos_.push_back(std::make_shared<Item>(
-            item->getName(), amount, item->getPrice(), item->getRarity()));
+            item->getName(), amount, item->getPrice(), item->getRarity(), time_));
     }
 }
 void Ship::setOwner(Player* newOwner)

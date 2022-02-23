@@ -10,7 +10,7 @@ enum class Rarity { common = 1,
 // Class responsible for managing Items in the game.
 class Item : public Cargo {
 public:
-    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
+    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity, Time* time);
     ~Item() override {};
 
     Cargo& operator+=(const size_t amount) override;
